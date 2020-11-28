@@ -17,8 +17,8 @@ GPIO_Pins = {'relay_1':6, 'relay_2':12, 'trig_1':17,'echo_1':18, 'trig_2':22,'ec
 MQTT values
 """
 mqtt_broker = "ubuntu-mini.local"
-mqtt_account = "garage-pi"
-mqtt_passwd = "mig0hurz-pi"
+mqtt_account = ""
+mqtt_passwd = ""
 mqtt_topic = "garage/command"
 
 """

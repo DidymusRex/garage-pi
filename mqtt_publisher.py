@@ -6,8 +6,8 @@ from time import sleep
 MQTT values
 """
 mqtt_broker = "ubuntu-mini.local"
-mqtt_account = "garage-pi"
-mqtt_passwd = "mig0hurz-pi"
+mqtt_account = ""
+mqtt_passwd = ""
 
 topic = sys.argv[1]
 payload = sys.argv[2]

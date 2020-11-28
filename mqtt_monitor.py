@@ -4,8 +4,8 @@ import paho.mqtt.client as mqtt
 MQTT values
 """
 mqtt_broker = "ubuntu-mini.local"
-mqtt_account = "garage-pi"
-mqtt_passwd = "mig0hurz-pi"
+mqtt_account = ""
+mqtt_passwd = ""
 mqtt_topic = "garage/#"
 
 """
