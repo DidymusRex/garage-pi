@@ -1,6 +1,9 @@
 import paho.mqtt.client as mqtt
 import sys
 from time import sleep
+"""
+A simple, generic MQTT client to send MQTT commands for testing
+"""
 
 """
 MQTT values

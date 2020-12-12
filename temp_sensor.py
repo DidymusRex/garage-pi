@@ -2,6 +2,9 @@ import Adafruit_DHT
 import RPi.GPIO as GPIO
 from time import sleep
 
+"""
+a simple wrapper for the DHT11 temperature and humidity sensor
+"""
 class temp_sensor():
 
     def __init__(self, mqc, pin):

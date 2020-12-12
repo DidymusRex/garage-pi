@@ -8,10 +8,10 @@ from time import sleep
 """
 GPIO pin assignments:
     relays
-    range finders (echo passes thru voltage converter)
-    DHT11
+    range finder sensor (echo passes thru voltage converter)
+    DHT11 temperature/huidity sensor
 """
-GPIO_Pins = {'relay_1':6, 'relay_2':12, 'trig_1':17,'echo_1':18, 'trig_2':22,'echo_2':23, 'trig_3':19,'echo_3':16, 'trig_4':26,'echo_4':20, 'temp_1':21}
+GPIO_Pins = {'temp_1':21, 'relay_1':6, 'relay_2':12, 'trig_1':17,'echo_1':18, 'trig_2':22,'echo_2':23}
 
 """
 MQTT values
@@ -94,8 +94,8 @@ dht11 = temp_sensor(mqc, GPIO_Pins['temp_1'])
 Create garage door objects
 """
 garage_doors = dict()
-garage_doors["left"] = garage_door(mqc, "left", GPIO_Pins['relay_1'], GPIO_Pins['echo_1'], GPIO_Pins['trig_1'], GPIO_Pins['echo_2'], GPIO_Pins['trig_2'])
-garage_doors["right"] = garage_door(mqc, "right", GPIO_Pins['relay_2'], GPIO_Pins['echo_3'], GPIO_Pins['trig_3'], GPIO_Pins['echo_4'], GPIO_Pins['trig_4'])
+garage_doors["left"] = garage_door(mqc, "left", GPIO_Pins['relay_1'], GPIO_Pins['echo_1'], GPIO_Pins['trig_1'])
+garage_doors["right"] = garage_door(mqc, "right", GPIO_Pins['relay_2'], GPIO_Pins['echo_2'], GPIO_Pins['trig_2'])
 
 if __name__ == "__main__":
     main()

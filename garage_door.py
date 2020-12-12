@@ -7,9 +7,11 @@ class garage_door():
     """
     Create a garage door object with a relay and two sensors
         Triggering the relay opens or closes the door (reversing it's current position)
+        The sensor should be mounted above the door to measure the distance from the 
+            ceiling to the door. An open door is a shorter distance than a closed door
         Send events and receive commands from the MQTT broker
     """
-    def __init__(self, mqc, name, relay, echo_1, trig_1, echo_2, trig_2):
+    def __init__(self, mqc, name, relay, echo_1, trig_1):
         GPIO.setmode(GPIO.BCM)
 
         self.mqc = mqc
@@ -17,8 +19,7 @@ class garage_door():
         self.name = name
         GPIO.setup(relay, GPIO.OUT, initial=GPIO.HIGH)
 
-        self.sensor1 = DistanceSensor(echo=echo_1, trigger=trig_1)
-        self.sensor2 = DistanceSensor(echo=echo_2, trigger=trig_2)
+        self.sensor = DistanceSensor(echo=echo_1, trigger=trig_1)
 
         self.position = 0
         self.position_list = ('error', 'open', 'closed')
@@ -60,19 +61,13 @@ class garage_door():
         """
         print("---- read sensor1")
         distance_1=self.sensor1.distance * 100
-        print("---- read sensor2")
-        distance_2=self.sensor2.distance * 100
 
-        if (distance_1 > 20 and distance_2 > 20):
+        if (distance_1 > 20):
             # Door is closed
             self.position = 2
-        else:
-            if (distance_1 < 20 and distance_2 < 20):
-                # Door is open
-                self.position = 1
-            else:
-                # Error (may be in motion)
-                self.position = 0
+        elif (distance_1 < 20):
+            # Door is open
+            self.position = 1
 
         topic = "garage/door/{}/position".format(self.name)
         payload = self.position_list[self.position]

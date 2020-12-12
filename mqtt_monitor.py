@@ -1,4 +1,8 @@
 import paho.mqtt.client as mqtt
+"""
+A simple, generic MQTT client to monitor MQTT commands and
+results
+"""
 
 """
 MQTT values
