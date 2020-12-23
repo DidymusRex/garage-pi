@@ -24,11 +24,18 @@ def on_connect(client, userdata, flags, rc):
 MQTT receive message callback
 """
 def on_message(client, userdata, msg):
-    print("message received " ,str(msg.payload.decode("utf-8")))
     print("message topic=",msg.topic)
     print("message qos=",msg.qos)
     print("message retain flag=",msg.retain)
     print("-" * 40)
+
+    if msg.topic == "garage/environment/still":
+        f = open('/tmp/output.jpg', "wb")
+        f.write(msg.payload)
+        print("image received")
+        f.close()
+    else:
+        print("message received " ,str(msg.payload.decode("utf-8")))
 
 mqc = mqtt.Client("monitor")
 mqc.on_connect = on_connect

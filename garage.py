@@ -1,6 +1,7 @@
 from datetime import datetime
 from gpiozero import DistanceSensor
 from garage_door import garage_door
+from garage_camera import garage_camera
 import paho.mqtt.client as mqtt
 from temp_sensor import temp_sensor
 from time import sleep
@@ -52,11 +53,12 @@ def on_message(client, userdata, msg):
                 garage_doors[subject].get_position()
             else:
                 print("Invalid command {}".format(action))
+        elif subject == "dht11":
+            dht11.check_temp()
+        elif subject == "still":
+            garage_cam.take_still()
         else:
-            if subject == "dht11":
-                dht11.check_temp()
-            else:
-                print("invalid subject {}".format(subject))
+            print("invalid subject {}".format(subject))
     else:
         print("Invalid payload")
 """
@@ -89,6 +91,11 @@ mqc.publish("garage/foo", "go!")
 Create temperature sensor object
 """
 dht11 = temp_sensor(mqc, GPIO_Pins['temp_1'])
+
+"""
+Create garage camera object
+"""
+garage_cam = garage_camera(mqc)
 
 """
 Create garage door objects
