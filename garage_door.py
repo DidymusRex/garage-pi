@@ -59,8 +59,8 @@ class garage_door():
         """
         Position: 0=error, 1=open, 2=closed
         """
-        print("---- read sensor1")
-        distance_1=self.sensor1.distance * 100
+        print("---- read sensor")
+        distance_1=self.sensor.distance * 100
 
         if (distance_1 > 20):
             # Door is closed

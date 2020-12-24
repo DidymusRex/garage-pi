@@ -8,8 +8,8 @@ results
 MQTT values
 """
 mqtt_broker = "ubuntu-mini.local"
-mqtt_account = ""
-mqtt_passwd = ""
+mqtt_account = "garage-pi"
+mqtt_passwd = "garage-pi"
 mqtt_topic = "garage/#"
 
 """

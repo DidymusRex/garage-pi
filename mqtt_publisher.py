@@ -9,8 +9,8 @@ A simple, generic MQTT client to send MQTT commands for testing
 MQTT values
 """
 mqtt_broker = "ubuntu-mini.local"
-mqtt_account = ""
-mqtt_passwd = ""
+mqtt_account = "garage-pi"
+mqtt_passwd = "garage-pi"
 
 topic = sys.argv[1]
 payload = sys.argv[2]

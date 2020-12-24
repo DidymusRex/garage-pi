@@ -18,8 +18,8 @@ GPIO_Pins = {'temp_1':21, 'relay_1':6, 'relay_2':12, 'trig_1':17,'echo_1':18, 't
 MQTT values
 """
 mqtt_broker = "ubuntu-mini.local"
-mqtt_account = ""
-mqtt_passwd = ""
+mqtt_account = "garage-pi"
+mqtt_passwd = "garage-pi"
 mqtt_topic = "garage/command"
 
 """
@@ -41,6 +41,7 @@ def on_message(client, userdata, msg):
     print("message retain flag=", msg.retain)
 
     cmd = str(msg.payload.decode("utf-8")).split(",")
+    bad_command = False
     if len(cmd) == 2:
         (subject, action) = cmd
 
@@ -52,15 +53,21 @@ def on_message(client, userdata, msg):
             elif action == "check":
                 garage_doors[subject].get_position()
             else:
-                print("Invalid command {}".format(action))
+                bad_command = True
         elif subject == "dht11":
             dht11.check_temp()
-        elif subject == "still":
-            garage_cam.take_still()
+        elif subject == "camera":
+            if action == "still":
+                garage_cam.take_still()
+            else:
+                bad_command = True
         else:
-            print("invalid subject {}".format(subject))
+            bad_command = True
     else:
-        print("Invalid payload")
+        bad_command = True
+
+    if bad_command:
+        print("Invalid payload {}".format(msg.payload.decode("utf-8")))
 """
 MQTT publish callback
     Mainly for debugging

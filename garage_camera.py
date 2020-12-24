@@ -2,12 +2,11 @@ from time import sleep
 from picamera import PiCamera
 
 """
-a simple wrapper for the DHT11 temperature and humidity sensor
+a wrapper for the pi camera functions
 """
 class garage_camera():
 
     def __init__(self, mqc):
-        GPIO.setmode(GPIO.BCM)
         self.mqc = mqc
 
         self.camera = PiCamera()
@@ -15,7 +14,7 @@ class garage_camera():
         self.camera.start_preview()
 
     def __publish(self, topic, payload):
-        print("---- publishing topic {} payload {}".format(topic, payload))
+        print("---- publishing topic {} still image".format(topic))
         rc = self.mqc.publish(topic, payload, 0)
         sleep(5)
         print("---- rc = {} mid = {} is_published = {}".format(rc.rc, rc.mid, rc.is_published()))
