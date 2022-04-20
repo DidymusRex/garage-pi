@@ -14,7 +14,13 @@ GPIO pin assignments:
     range finder sensor (echo passes thru voltage converter)
     DHT11 temperature/huidity sensor
 """
-GPIO_Pins = {'temp_1':21, 'relay_1':6, 'relay_2':12, 'trig_1':17,'echo_1':18, 'trig_2':22,'echo_2':23}
+GPIO_Pins = {'temp_1':21, 
+             'relay_1':6, 
+             'relay_2':12, 
+             'trig_1':17,
+             'echo_1':18, 
+             'trig_2':22,
+             'echo_2':23}
 
 """
 MQTT connect callback
@@ -102,8 +108,16 @@ garage_cam = garage_camera(mqc)
 Create garage door objects
 """
 garage_doors = dict()
-garage_doors["left"] = garage_door(mqc, "left", GPIO_Pins['relay_1'], GPIO_Pins['echo_1'], GPIO_Pins['trig_1'])
-garage_doors["right"] = garage_door(mqc, "right", GPIO_Pins['relay_2'], GPIO_Pins['echo_2'], GPIO_Pins['trig_2'])
+garage_doors["left"] = garage_door(mqc, 
+                                   "left", 
+                                   GPIO_Pins['relay_1'], 
+                                   GPIO_Pins['echo_1'], 
+                                   GPIO_Pins['trig_1'])
+garage_doors["right"] = garage_door(mqc, 
+                                    "right", 
+                                    GPIO_Pins['relay_2'], 
+                                    GPIO_Pins['echo_2'], 
+                                    GPIO_Pins['trig_2'])
 
 if __name__ == "__main__":
     main()
