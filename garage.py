@@ -2,9 +2,11 @@ from datetime import datetime
 from gpiozero import DistanceSensor
 from garage_door import garage_door
 from garage_camera import garage_camera
+import MQTT_Config
 import paho.mqtt.client as mqtt
 from temp_sensor import temp_sensor
 from time import sleep
+
 
 """
 GPIO pin assignments:
@@ -13,14 +15,6 @@ GPIO pin assignments:
     DHT11 temperature/huidity sensor
 """
 GPIO_Pins = {'temp_1':21, 'relay_1':6, 'relay_2':12, 'trig_1':17,'echo_1':18, 'trig_2':22,'echo_2':23}
-
-"""
-MQTT values
-"""
-mqtt_broker = "ubuntu-mini.local"
-mqtt_account = "garage-pi"
-mqtt_passwd = "garage-pi"
-mqtt_topic = "garage/command"
 
 """
 MQTT connect callback

@@ -1,16 +1,9 @@
+import MQTT_Config
 import paho.mqtt.client as mqtt
 """
 A simple, generic MQTT client to monitor MQTT commands and
 results
 """
-
-"""
-MQTT values
-"""
-mqtt_broker = "ubuntu-mini.local"
-mqtt_account = "garage-pi"
-mqtt_passwd = "garage-pi"
-mqtt_topic = "garage/#"
 
 """
 MQTT connect callback

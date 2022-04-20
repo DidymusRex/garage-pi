@@ -1,16 +1,10 @@
+import MQTT_Config
 import paho.mqtt.client as mqtt
 import sys
 from time import sleep
 """
 A simple, generic MQTT client to send MQTT commands for testing
 """
-
-"""
-MQTT values
-"""
-mqtt_broker = "ubuntu-mini.local"
-mqtt_account = "garage-pi"
-mqtt_passwd = "garage-pi"
 
 topic = sys.argv[1]
 payload = sys.argv[2]
